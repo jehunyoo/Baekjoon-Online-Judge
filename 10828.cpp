@@ -1,3 +1,4 @@
+// 스택
 #include <iostream>
 #include <cstdio>
 #include <cstring>
