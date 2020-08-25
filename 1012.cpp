@@ -33,7 +33,7 @@ int main(void)
 
 int countWarms(int farm[][MAX], int M, int N)
 {
-    int warm = 0;
+    int worm = 0;
     int visited[MAX][MAX];
     std::stack<int> st;
 
@@ -43,7 +43,7 @@ int countWarms(int farm[][MAX], int M, int N)
         for (int j=0; j<N; j++) {
             if (farm[i][j] == 1 && visited[i][j] == 0) {
                 visited[i][j] = 1;
-                warm++;
+                worm++;
                 st.push(M * j + i); // (i, j) -> M * j + i
                 while (!st.empty())
                 {
@@ -64,5 +64,5 @@ int countWarms(int farm[][MAX], int M, int N)
         }
     }
 
-    return warm;
+    return worm;
 }
