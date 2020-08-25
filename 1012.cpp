@@ -4,7 +4,7 @@
 #include <stack>
 #define MAX 50
 
-int countWarms(int farm[][MAX], int M, int N);
+int countWorms(int farm[][MAX], int M, int N);
 
 int main(void)
 {
@@ -22,7 +22,7 @@ int main(void)
             farm[X][Y] = 1; // rows -> X & columns -> Y
         }
         
-        outputs[t] = countWarms(farm, M, N);
+        outputs[t] = countWorms(farm, M, N);
     }
 
     for (int t=0; t<T; t++)
@@ -31,7 +31,7 @@ int main(void)
     return 0;
 }
 
-int countWarms(int farm[][MAX], int M, int N)
+int countWorms(int farm[][MAX], int M, int N)
 {
     int worm = 0;
     int visited[MAX][MAX];
