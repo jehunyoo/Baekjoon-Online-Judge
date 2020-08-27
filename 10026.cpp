@@ -4,9 +4,6 @@
 #include <stack>
 #include <utility>
 #define MAXSIZE 100
-// #define R 0
-// #define G 1
-// #define B 2
 
 typedef std::pair<int,int> Node;
 
