@@ -1,56 +1,40 @@
-# https://www.acmicpc.net/problem/3085
-# 사탕게임
-
-
-def eat(bom, N, option, where=None): # FIXME : only for continuous candies!!!
-    if option == "all":
-        ans = 0
-        for n in range(N):
-            candies1 = [bom[n][k] for k in range(N)]
-            candies2 = [bom[k][n] for k in range(N)]
-            
-            candy1 = max(list(map(candies1.count, candies1)))
-            candy2 = max(list(map(candies2.count, candies2)))
-
-            ans = max(ans, candy1, candy2)
-
-        return ans
-    
-    elif option == "col":
-        candies1 = [bom[k][where] for k in range(N)]
-        candies2 = [bom[k][where+1] for k in range(N)]
-    elif option == "row":
-        candies1 = [bom[where][k] for k in range(N)]
-        candies2 = [bom[where+1][k] for k in range(N)]
-
-    candy1 = max(list(map(candies1.count, candies1)))
-    candy2 = max(list(map(candies2.count, candies2)))
-    return max(candy1, candy2)
-    
-def change(bom, N, i, j):
-    tmp = bom[:]
-    # FIXME: 'str' object does not support item assignment
-    # FIXED: replace input().split() to lst(input()) // split by each characters
-    bom[i][j], bom[i][j+1] = bom[i][j+1], bom[i][j] # change right and left
-    candy1 = eat(bom, N, option="col", where=j)
-    bom = tmp[:]
-    bom[i][j], bom[i+1][j] = bom[i+1][j], bom[i][j] # change up and down
-    candy2 = eat(bom, N, option="row", where=i)
-    return max(candy1, candy2)
-
+def eat(line):
+    answer = 0
+    count = 0
+    before = None
+    for candy in line:
+        if (not before) or (before == candy):
+            count += 1
+            before = candy
+        else:
+            answer = max(answer, count)
+            before = candy
+            count = 1
+    return max(answer, count)
 
 N = int(input())
-bom = []
+candies = [[candy for candy in input()] for _ in range(N)]
+answer = 0
 
-for _ in range(N):
-    bom.append(list(input())) # FIXED
+for row in range(N):
+    answer = max(answer, eat(candies[row]))
+for col in range(N):
+    answer = max(answer, eat([candies[i][col] for i in range(N)]))
 
-ans = eat(bom, N, option="all")
-print(ans)
-# print(bom)
+for row in range(N):
+    for col in range(N):
+        if col + 1 < N and candies[row][col] != candies[row][col + 1]:
+            candies[row][col], candies[row][col + 1] = candies[row][col + 1], candies[row][col]
+            answer = max(answer, eat(candies[row]))
+            answer = max(answer, eat([candies[i][col] for i in range(N)]))
+            answer = max(answer, eat([candies[i][col + 1] for i in range(N)]))
+            candies[row][col], candies[row][col + 1] = candies[row][col + 1], candies[row][col]
+            
+        if row + 1 < N and candies[row][col] != candies[row + 1][col]:
+            candies[row][col], candies[row + 1][col] = candies[row + 1][col], candies[row][col]
+            answer = max(answer, eat(candies[row]))
+            answer = max(answer, eat(candies[row + 1]))
+            answer = max(answer, eat([candies[i][col] for i in range(N)]))
+            candies[row][col], candies[row + 1][col] = candies[row + 1][col], candies[row][col]
 
-for i in range(N-1):
-    for j in range(N-1):
-        ans = max(ans, change(bom, N, i, j))
-
-print(ans)
+print(answer)
