@@ -5,7 +5,7 @@ for _ in range(N):
     T.append(t)
     P.append(p)
 
-dp = [0 for _ in range(N + 1)] # i번째 날부터 마지막 날까지 가능한 최대 이익 / top-down approach
+dp = [0 for _ in range(N + 1)] # i번째 날부터 마지막 날까지 가능한 최대 이익
 max_profit = 0
 
 for day in range(N - 1, -1, -1):
