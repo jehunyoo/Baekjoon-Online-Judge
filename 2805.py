@@ -12,7 +12,7 @@ while left <= right:
     for tree in trees:
         if tree - mid > 0:
             length += tree - mid
-        if length > M:
+        if length > M: # no need to sum once length exceeds M
             break
     
     if length < M:
