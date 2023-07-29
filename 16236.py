@@ -12,7 +12,7 @@ for row, line in enumerate(ocean):
         if 0 < cell < 9:
             fish[(row, col)] = cell
 
-delta = [(-1, 0), (0, -1), (0, 1), (1, 0)] # order matters / up left right down
+delta = [(-1, 0), (0, -1), (0, 1), (1, 0)]
 time = 0
 shark_size = 2
 eat_count = 0
