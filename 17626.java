@@ -8,6 +8,31 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int N = Integer.parseInt(br.readLine());
+        int[] dp = new int[N + 1];
+
+        for (int i = 1; i * i <= N; i++) {
+            dp[i * i] = 1;
+        }
+
+        for (int num = 1; num <= N; num++) {
+            if (dp[num] == 0) {
+                for (int i = 1; i * i <= num; i++) {
+                    int count = dp[i * i] + dp[num - (i * i)];
+                    dp[num] = dp[num] > 0 ? Math.min(dp[num], count) : count;
+                }
+            }
+        }
+
+        bw.write(dp[N] + "\n");
+        bw.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
         int answer = 0;
 
         loop: for (int a = 0; a < Math.sqrt(N) + 1; a++) {
