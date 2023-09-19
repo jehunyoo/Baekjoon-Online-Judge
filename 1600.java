@@ -88,10 +88,7 @@ public class Main {
         public boolean isMovableTo(Status[][] world, int nx, int ny) {
             int H = world.length, W = world[0].length;
 
-            if (0 <= nx && nx < H && 0 <= ny && ny < W && world[nx][ny] == Status.FLATLAND)
-                return true;
-
-            return false;
+            return 0 <= nx && nx < H && 0 <= ny && ny < W && world[nx][ny] == Status.FLATLAND;
         }
     }
 }
